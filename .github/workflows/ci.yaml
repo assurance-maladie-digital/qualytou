@@ -1,0 +1,55 @@
+name: "CI"
+
+on:
+  pull_request:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  tests:
+    name: "PHP ${{ matrix.php-version }} (${{ matrix.dependencies }} dependencies)"
+
+    runs-on: ubuntu-latest
+
+    env:
+      COMPOSER_UP: 'composer update --no-progress --ansi'
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version:
+          - '7.3'
+          - '7.4'
+          - '8.0'
+        dependencies:
+          - 'highest'
+        include:
+          - php-version: '7.3'
+            dependencies: 'lowest'
+
+    steps:
+      - name: "Checkout code"
+        uses: actions/checkout@v2.3.3
+
+      - name: "Install PHP with extensions"
+        uses: shivammathur/setup-php@2.7.0
+        with:
+          coverage: "none"
+          php-version: ${{ matrix.php-version }}
+          tools: composer:v2
+
+      - name: "Validate composer.json"
+        run: "composer validate --strict --no-check-lock"
+
+      - name: Configure environment
+        run: |
+          if [[ "${{ matrix.dependencies }}" = lowest ]]; then
+            echo "COMPOSER_UP=${{ env.COMPOSER_UP }} --prefer-lowest --prefer-stable" >> "$GITHUB_ENV"
+          fi
+
+      - name: Install dependencies
+        run: "${{ env.COMPOSER_UP }}"
+
+      - name: Run the static tools with grumphp
+        run: "php vendor/bin/grumphp run --no-interaction"

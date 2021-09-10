@@ -1,0 +1,12 @@
+grumphp:
+    ascii:
+        failed:
+        succeeded:
+    tasks:
+        phpcsfixer:
+            config: '.php-cs-fixer.php'
+        phpmd:
+            ruleset: ['./pmd-ruleset.xml']
+        phpstan:
+            configuration: './phpstan.neon'
+        psalm: ~
