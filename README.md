@@ -35,3 +35,17 @@ Il est donc possible de personnaliser chaque fichier de configuration.
 
 Cette commande `php vendor/bin/grumphp run` execute donc tous les outils en 
 parallèle, mais uniquement pour les modifications qui seront validées.
+
+## Suppression des avertissements
+
+Dans certains cas, il est préférable d'ignorer les avertissements.  
+Excepté pour [PHPMD - PHP Mess Detector](https://phpmd.org/) il est conseillé 
+d'ignorer les avertissements dans les fichiers de configuration :
+
+- [PHPMD](https://phpmd.org/documentation/suppress-warnings.html)
+- [PHPStan](https://phpstan.org/user-guide/ignoring-errors#ignoring-in-configuration-file)
+- [Psalm](https://psalm.dev/docs/running_psalm/dealing_with_code_issues/#config-suppression)
+
+Ignorer les avertissements dans les fichiers de configuration permet de ne pas
+ajouter du code spécifique pour les outils d'analyses statiques.  
+Si vous décidez d'en supprimer un, votre code restera propre.

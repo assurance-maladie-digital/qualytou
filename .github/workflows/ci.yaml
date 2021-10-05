@@ -52,4 +52,6 @@ jobs:
         run: "${{ env.COMPOSER_UP }}"
 
       - name: Run the static tools with grumphp
-        run: "php vendor/bin/grumphp run --no-interaction"
+        run: |
+          mkdir tests
+          php vendor/bin/grumphp run --no-interaction

@@ -36,4 +36,5 @@
     <exclude-pattern>*Monolog*</exclude-pattern>
     <exclude-pattern>*Version*</exclude-pattern>
     <exclude-pattern>*src/Kernel.php</exclude-pattern>
+    <exclude-pattern>tests/*</exclude-pattern>
 </ruleset>
