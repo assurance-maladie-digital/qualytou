@@ -12,6 +12,7 @@ use Composer\Installer\PackageEvent;
 use Composer\Installer\PackageEvents;
 use Composer\IO\IOInterface;
 use Composer\Plugin\PluginInterface;
+use PHPStaticAnalysisTool\Exception\PathNotFound;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
@@ -50,7 +51,9 @@ class InstallFilesPlugin implements EventSubscriberInterface, PluginInterface
     }
 
     /**
-     * @return string[]
+     * {@inheritDoc}
+     *
+     * @return array<string, string|array{0: string, 1?: int}|array<array{0: string, 1?: int}>> The event names to listen to
      */
     public static function getSubscribedEvents(): array
     {
@@ -63,7 +66,12 @@ class InstallFilesPlugin implements EventSubscriberInterface, PluginInterface
     public function postPackageInstall(PackageEvent $event): void
     {
         $filesystem = new Filesystem();
-        $vendorBin = (string) $this->composer->getConfig()->get('vendor-dir');
+        $vendorBin = $this->composer->getConfig()->get('vendor-dir');
+
+        if (!is_string($vendorBin)) {
+            throw new PathNotFound('vendor-bin');
+        }
+
         /** @var InstallOperation $operation */
         $operation = $event->getOperation();
 
