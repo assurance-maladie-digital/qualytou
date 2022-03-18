@@ -1,7 +1,7 @@
 # Assurance-maladie-digital Qualytou
 
 Fournit des outils d'analyse statique pour PHP utilisé dans les projets de 
-la CNAM.
+la CNAM sous Symfony.
 
 ## Démarrage
 
