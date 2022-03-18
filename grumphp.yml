@@ -4,7 +4,7 @@ grumphp:
         succeeded:
     tasks:
         phpcsfixer:
-            config: '.php-cs-fixer.php'
+            config: '.php-cs-fixer.dist.php'
         phpmd:
             ruleset: ['./pmd-ruleset.xml']
         phpstan:
