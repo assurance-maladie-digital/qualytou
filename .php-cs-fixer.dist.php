@@ -73,5 +73,5 @@ return (new PhpCsFixer\Config())
         ->notPath('src/Kernel.php')
         ->notPath('public/index.php')
         ->notPath('tests/bootstrap.php'))
-    ->setUsingCache(false)
+    ->setCacheFile('.php-cs-fixer.cache')
 ;
