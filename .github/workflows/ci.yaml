@@ -57,5 +57,5 @@ jobs:
 
       - name: Run the static tools with grumphp
         run: |
-          mkdir tests
+          mkdir tests config
           php vendor/bin/grumphp run --no-interaction
