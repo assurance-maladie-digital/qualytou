@@ -12,6 +12,7 @@
             <directory name="config" />
             <directory name="vendor" />
             <directory name="tests" />
+            <file name="src/Kernel.php" />
         </ignoreFiles>
     </projectFiles>
 </psalm>
