@@ -1,13 +1,7 @@
 <?php
 
-$finder = PhpCsFixer\Finder::create()
-    ->in(__DIR__ . '/')
-    ->exclude('vendor')
-    ->exclude('var')
-;
-
-$config = new PhpCsFixer\Config();
-$config->setRiskyAllowed(true)
+return (new PhpCsFixer\Config())
+    ->setRiskyAllowed(true)
     ->setRules(
         [
             '@DoctrineAnnotation' => true,
@@ -68,8 +62,16 @@ $config->setRiskyAllowed(true)
         ]
     )
     ->setRiskyAllowed(true)
-    ->setFinder($finder)
-    ->setUsingCache(false)
+    ->setFinder((new PhpCsFixer\Finder())
+        ->in(__DIR__ . '/')
+        ->exclude([
+            'vendor',
+            'var',
+            'config',
+            'public'
+        ])
+        ->notPath('src/Kernel.php')
+        ->notPath('public/index.php')
+        ->notPath('tests/bootstrap.php'))
+    ->setCacheFile('.php-cs-fixer.cache')
 ;
-
-return $config;

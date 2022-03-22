@@ -1,7 +1,7 @@
 # Assurance-maladie-digital Qualytou
 
 Fournit des outils d'analyse statique pour PHP utilisé dans les projets de 
-la CNAM.
+la CNAM sous Symfony.
 
 ## Démarrage
 
@@ -16,7 +16,7 @@ installés à la racine dans votre projet pour indiquer aux outils comment
 analyser votre code source.  
 Une fois configuré, vous pouvez le lancer via `php vendor/bin/grumphp run`.
 
-Qualytou 1 dépend de PHP 7.3+.
+Qualytou 2 dépend de PHP 7.3+.
 
 ## Fonctionnalités
 
