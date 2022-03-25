@@ -30,7 +30,7 @@ class InstallFilesPlugin implements EventSubscriberInterface, PluginInterface
 
     private const FILES = [
         'grumphp.yml',
-        '.php-cs-fixer.php',
+        '.php-cs-fixer.dist.php',
         'phpstan.neon',
         'pmd-ruleset.xml',
         'psalm.xml',
