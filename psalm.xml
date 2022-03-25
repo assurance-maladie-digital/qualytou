@@ -13,6 +13,7 @@
             <directory name="vendor" />
             <directory name="tests" />
             <file name="src/Kernel.php" />
+            <file name="public/index.php" />
         </ignoreFiles>
     </projectFiles>
 </psalm>

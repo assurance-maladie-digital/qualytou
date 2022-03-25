@@ -5,3 +5,5 @@ parameters:
 		- src
 	parallel:
 		maximumNumberOfProcesses: 1
+	excludePaths:
+		- 'src/Kernel.php'
