@@ -39,6 +39,9 @@
         "class": "PHPStaticAnalysisTool\\Composer\\InstallFilesPlugin"
     },
     "config": {
+        "allow-plugins": {
+            "phpro/grumphp": true
+        },
         "preferred-install": {
             "*": "dist"
         },
