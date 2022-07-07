@@ -40,7 +40,8 @@
     },
     "config": {
         "allow-plugins": {
-            "phpro/grumphp": true
+            "phpro/grumphp": true,
+            "phpstan/extension-installer": true
         },
         "preferred-install": {
             "*": "dist"
