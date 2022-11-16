@@ -16,4 +16,18 @@
             <file name="public/index.php" />
         </ignoreFiles>
     </projectFiles>
+    <issueHandlers>
+        <PropertyNotSetInConstructor>
+            <errorLevel type="suppress">
+                <directory name="src/Entity" />
+                <directory name="src/Model" />
+            </errorLevel>
+        </PropertyNotSetInConstructor>
+        <MissingConstructor>
+            <errorLevel type="suppress">
+                <directory name="src/Entity" />
+                <directory name="src/Model" />
+            </errorLevel>
+        </MissingConstructor>
+    </issueHandlers>
 </psalm>
