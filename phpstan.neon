@@ -11,6 +11,7 @@ parameters:
 		-
 			message: '#Property .+::\$id is never written, only read\.#'
 			path: src/Entity/*
+			reportUnmatched: false
 	banned_code:
 		nodes:
 			# enable detection of echo
