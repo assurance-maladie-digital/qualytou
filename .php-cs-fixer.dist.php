@@ -50,6 +50,7 @@ return (new PhpCsFixer\Config())
             'explicit_indirect_variable' => true,
             'explicit_string_variable' => true,
             'fully_qualified_strict_types' => true,
+            'global_namespace_import' => ['import_classes' => false, 'import_constants' => false, 'import_functions' => false],
             'linebreak_after_opening_tag' => true,
             'list_syntax' => ['syntax' => 'short'],
             'mb_str_functions' => true,
