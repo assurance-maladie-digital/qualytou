@@ -20,14 +20,7 @@
         <PropertyNotSetInConstructor>
             <errorLevel type="suppress" allowMissingFiles="true">
                 <directory name="src/Entity" />
-                <directory name="src/Model" />
             </errorLevel>
         </PropertyNotSetInConstructor>
-        <MissingConstructor>
-            <errorLevel type="suppress" allowMissingFiles="true">
-                <directory name="src/Entity" />
-                <directory name="src/Model" />
-            </errorLevel>
-        </MissingConstructor>
     </issueHandlers>
 </psalm>
