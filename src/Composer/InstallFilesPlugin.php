@@ -85,13 +85,14 @@ class InstallFilesPlugin implements EventSubscriberInterface, PluginInterface
 
         $name = $operation->getPackage()->getName();
 
-        $this->io->write(sprintf('<fg=yellow>Création des fichiers de configuration :</>'));
+        $this->io->write('<fg=yellow>Création des fichiers de configuration :</>');
 
         foreach (self::FILES as $file) {
-            if (true === $filesystem->exists($file)) {
-                $answer = $this->io->ask(sprintf('Le fichier de configuration %s existe déjà. Voulez-vous le conserver ? [<fg=yellow>o,n</>] ', $file));
+            if ($filesystem->exists($file) === true) {
+                /** @phpstan-ignore-next-line */
+                $answer = (string) $this->io->ask(sprintf('Le fichier de configuration %s existe déjà. Voulez-vous le conserver ? [<fg=yellow>o,n</>] ', $file));
 
-                if (is_null($answer) || in_array(strtolower($answer), ['oui', 'o', 'yes', 'y'])) {
+                if ($answer === '' || in_array($answer, ['oui', 'o', 'yes', 'y'])) {
                     $this->io->write(sprintf('<info>Le fichier de configuration %s a été conservé.</info>', $file));
 
                     continue;
@@ -114,13 +115,14 @@ class InstallFilesPlugin implements EventSubscriberInterface, PluginInterface
 
         $filesystem = new Filesystem();
 
-        $this->io->write(sprintf('<fg=yellow>Détection des fichiers installés :</>'));
+        $this->io->write('<fg=yellow>Détection des fichiers installés :</>');
 
         foreach (self::FILES as $file) {
-            if (true === $filesystem->exists($file)) {
-                $answer = $this->io->ask(sprintf('Voulez-vous conserver le fichier %s ? [<fg=yellow>o,n</>] ', $file));
+            if ($filesystem->exists($file) === true) {
+                /** @phpstan-ignore-next-line */
+                $answer = (string) $this->io->ask(sprintf('Voulez-vous conserver le fichier %s ? [<fg=yellow>o,n</>] ', $file));
 
-                if (is_null($answer) || in_array(strtolower($answer), ['oui', 'o', 'yes', 'y'])) {
+                if ($answer === '' || in_array($answer, ['oui', 'o', 'yes', 'y'])) {
                     $this->io->write(sprintf('<info>Le fichier de configuration %s a été conservé.</info>', $file));
 
                     continue;
