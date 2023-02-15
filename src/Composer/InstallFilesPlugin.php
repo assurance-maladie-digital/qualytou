@@ -38,16 +38,20 @@ class InstallFilesPlugin implements EventSubscriberInterface, PluginInterface
 
     public function activate(Composer $composer, IOInterface $io): void
     {
+        $io->write('<info>[Qualitou] Activation</info>');
+
         $this->composer = $composer;
         $this->io = $io;
     }
 
     public function deactivate(Composer $composer, IOInterface $io): void
     {
+        $io->write('<info>[Qualitou] Désactivation</info>');
     }
 
     public function uninstall(Composer $composer, IOInterface $io): void
     {
+        $io->write('<info>[Qualitou] Désinstallation</info>');
     }
 
     /**
@@ -80,10 +84,23 @@ class InstallFilesPlugin implements EventSubscriberInterface, PluginInterface
         }
 
         $name = $operation->getPackage()->getName();
+
+        $this->io->write(sprintf('<fg=yellow>Création des fichiers de configuration :</>'));
+
         foreach (self::FILES as $file) {
+            if (true === $filesystem->exists($file)) {
+                $answer = $this->io->ask(sprintf('Le fichier de configuration %s existe déjà. Voulez-vous le conserver ? [<fg=yellow>o,n</>] ', $file));
+
+                if (is_null($answer) || in_array(strtolower($answer), ['oui', 'o', 'yes', 'y'])) {
+                    $this->io->write(sprintf('<info>Le fichier de configuration %s a été conservé.</info>', $file));
+
+                    continue;
+                }
+            }
+
             $filesystem->copy($vendorBin . \DIRECTORY_SEPARATOR . $name . \DIRECTORY_SEPARATOR . $file, $file);
+            $this->io->write(sprintf('<fg=yellow>Le fichier de configuration %s a été copié</>', $file));
         }
-        $this->io->write('<fg=yellow>Qualytou a installé les fichiers nécessaires à son fonctionnement !<fg=yellow>');
     }
 
     public function prePackageUninstall(PackageEvent $event): void
@@ -96,9 +113,22 @@ class InstallFilesPlugin implements EventSubscriberInterface, PluginInterface
         }
 
         $filesystem = new Filesystem();
+
+        $this->io->write(sprintf('<fg=yellow>Détection des fichiers installés :</>'));
+
         foreach (self::FILES as $file) {
-            $filesystem->remove($file);
+            if (true === $filesystem->exists($file)) {
+                $answer = $this->io->ask(sprintf('Voulez-vous conserver le fichier %s ? [<fg=yellow>o,n</>] ', $file));
+
+                if (is_null($answer) || in_array(strtolower($answer), ['oui', 'o', 'yes', 'y'])) {
+                    $this->io->write(sprintf('<info>Le fichier de configuration %s a été conservé.</info>', $file));
+
+                    continue;
+                }
+
+                $filesystem->remove($file);
+                $this->io->write(sprintf('<info>Le fichier de configuration %s a été supprimé.</info>', $file));
+            }
         }
-        $this->io->write('<fg=yellow>Qualytou a supprimé les fichiers de configuration !<fg=yellow>');
     }
 }
