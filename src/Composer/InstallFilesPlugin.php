@@ -38,7 +38,7 @@ class InstallFilesPlugin implements EventSubscriberInterface, PluginInterface
 
     public function activate(Composer $composer, IOInterface $io): void
     {
-        $io->write('<info>[Qualitou] Activation</info>');
+        $io->write('<info>[Qualytou] Activation</info>');
 
         $this->composer = $composer;
         $this->io = $io;
@@ -46,12 +46,12 @@ class InstallFilesPlugin implements EventSubscriberInterface, PluginInterface
 
     public function deactivate(Composer $composer, IOInterface $io): void
     {
-        $io->write('<info>[Qualitou] Désactivation</info>');
+        $io->write('<info>[Qualytou] Désactivation</info>');
     }
 
     public function uninstall(Composer $composer, IOInterface $io): void
     {
-        $io->write('<info>[Qualitou] Désinstallation</info>');
+        $io->write('<info>[Qualytou] Désinstallation</info>');
     }
 
     /**
@@ -89,10 +89,10 @@ class InstallFilesPlugin implements EventSubscriberInterface, PluginInterface
 
         foreach (self::FILES as $file) {
             if ($filesystem->exists($file) === true) {
-                /** @phpstan-ignore-next-line */
-                $answer = (string) $this->io->ask(sprintf('Le fichier de configuration %s existe déjà. Voulez-vous le conserver ? [<fg=yellow>o,n</>] ', $file));
+                /** @psalm-suppress MixedAssignment */
+                $answer = $this->io->ask(sprintf('Le fichier de configuration %s existe déjà. Voulez-vous le conserver (oui/non) ? [<fg=yellow>oui</>] ', $file));
 
-                if ($answer === '' || in_array($answer, ['oui', 'o', 'yes', 'y'])) {
+                if ($answer === null || in_array($answer, ['oui', 'o', 'yes', 'y'])) {
                     $this->io->write(sprintf('<info>Le fichier de configuration %s a été conservé.</info>', $file));
 
                     continue;
@@ -118,11 +118,11 @@ class InstallFilesPlugin implements EventSubscriberInterface, PluginInterface
         $this->io->write('<fg=yellow>Détection des fichiers installés :</>');
 
         foreach (self::FILES as $file) {
+            /** @psalm-suppress MixedAssignment */
             if ($filesystem->exists($file) === true) {
-                /** @phpstan-ignore-next-line */
-                $answer = (string) $this->io->ask(sprintf('Voulez-vous conserver le fichier %s ? [<fg=yellow>o,n</>] ', $file));
+                $answer = $this->io->ask(sprintf('Voulez-vous conserver le fichier %s (oui/non) ? [<fg=yellow>oui</>] ', $file));
 
-                if ($answer === '' || in_array($answer, ['oui', 'o', 'yes', 'y'])) {
+                if ($answer === null || in_array($answer, ['oui', 'o', 'yes', 'y'])) {
                     $this->io->write(sprintf('<info>Le fichier de configuration %s a été conservé.</info>', $file));
 
                     continue;
