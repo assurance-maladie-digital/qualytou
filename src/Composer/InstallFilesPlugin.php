@@ -38,20 +38,16 @@ class InstallFilesPlugin implements EventSubscriberInterface, PluginInterface
 
     public function activate(Composer $composer, IOInterface $io): void
     {
-        $io->write('<info>[Qualytou] Activation</info>');
-
         $this->composer = $composer;
         $this->io = $io;
     }
 
     public function deactivate(Composer $composer, IOInterface $io): void
     {
-        $io->write('<info>[Qualytou] Désactivation</info>');
     }
 
     public function uninstall(Composer $composer, IOInterface $io): void
     {
-        $io->write('<info>[Qualytou] Désinstallation</info>');
     }
 
     /**
@@ -87,12 +83,13 @@ class InstallFilesPlugin implements EventSubscriberInterface, PluginInterface
 
         $this->io->write('<fg=yellow>Création des fichiers de configuration :</>');
 
-        foreach (self::FILES as $file) {
-            if ($filesystem->exists($file) === true) {
-                /** @psalm-suppress MixedAssignment */
-                $answer = $this->io->ask(sprintf('Le fichier de configuration %s existe déjà. Voulez-vous le conserver (oui/non) ? [<fg=yellow>oui</>] ', $file));
+        $overrideAllQuestion = $this->io->askConfirmation('Écraser les configurations existantes, par défaut (yes/no) ? [<fg=yellow>yes</>]', true);
 
-                if ($answer === null || in_array($answer, ['oui', 'o', 'yes', 'y'])) {
+        foreach (self::FILES as $file) {
+            if ($filesystem->exists($file) === true && $overrideAllQuestion !== true) {
+                $overrideFileQuestion = $this->io->askConfirmation(sprintf('Le fichier de configuration %s existe déjà. Voulez-vous l\'écraser (yes/no) ? [<fg=yellow>yes</>] ', $file), true);
+
+                if ($overrideFileQuestion === false) {
                     $this->io->write(sprintf('<info>Le fichier de configuration %s a été conservé.</info>', $file));
 
                     continue;
@@ -117,19 +114,14 @@ class InstallFilesPlugin implements EventSubscriberInterface, PluginInterface
 
         $this->io->write('<fg=yellow>Détection des fichiers installés :</>');
 
-        foreach (self::FILES as $file) {
-            /** @psalm-suppress MixedAssignment */
-            if ($filesystem->exists($file) === true) {
-                $answer = $this->io->ask(sprintf('Voulez-vous conserver le fichier %s (oui/non) ? [<fg=yellow>oui</>] ', $file));
+        $deleteAllQuestion = $this->io->askConfirmation('Supprimer les fichiers de configurations existants (yes/no) ? [<fg=yellow>yes</>]', true);
 
-                if ($answer === null || in_array($answer, ['oui', 'o', 'yes', 'y'])) {
-                    $this->io->write(sprintf('<info>Le fichier de configuration %s a été conservé.</info>', $file));
-
-                    continue;
+        if ($deleteAllQuestion === true) {
+            foreach (self::FILES as $file) {
+                if ($filesystem->exists($file) === true) {
+                    $filesystem->remove($file);
+                    $this->io->write(sprintf('<info>Le fichier de configuration %s a été supprimé.</info>', $file));
                 }
-
-                $filesystem->remove($file);
-                $this->io->write(sprintf('<info>Le fichier de configuration %s a été supprimé.</info>', $file));
             }
         }
     }
