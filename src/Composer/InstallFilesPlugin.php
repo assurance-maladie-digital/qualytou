@@ -83,11 +83,11 @@ class InstallFilesPlugin implements EventSubscriberInterface, PluginInterface
 
         $this->io->write('<fg=yellow>Création des fichiers de configuration :</>');
 
-        $overrideAllQuestion = $this->io->askConfirmation('Écraser les configurations existantes, par défaut (yes/no) ? [<fg=yellow>yes</>]', true);
+        $overrideAllQuestion = $this->io->askConfirmation('Écraser les configurations existantes, par défaut (oui/non) ? [<fg=yellow>oui</>] ', true);
 
         foreach (self::FILES as $file) {
             if ($filesystem->exists($file) === true && $overrideAllQuestion !== true) {
-                $overrideFileQuestion = $this->io->askConfirmation(sprintf('Le fichier de configuration %s existe déjà. Voulez-vous l\'écraser (yes/no) ? [<fg=yellow>yes</>] ', $file), true);
+                $overrideFileQuestion = $this->io->askConfirmation(sprintf('Le fichier de configuration %s existe déjà. Voulez-vous l\'écraser (oui/non) ? [<fg=yellow>oui</>] ', $file), true);
 
                 if ($overrideFileQuestion === false) {
                     $this->io->write(sprintf('<info>Le fichier de configuration %s a été conservé.</info>', $file));
@@ -114,7 +114,7 @@ class InstallFilesPlugin implements EventSubscriberInterface, PluginInterface
 
         $this->io->write('<fg=yellow>Détection des fichiers installés :</>');
 
-        $deleteAllQuestion = $this->io->askConfirmation('Supprimer les fichiers de configurations existants (yes/no) ? [<fg=yellow>yes</>]', true);
+        $deleteAllQuestion = $this->io->askConfirmation('Supprimer les fichiers de configurations existants (oui/non) ? [<fg=yellow>oui</>] ', true);
 
         if ($deleteAllQuestion === true) {
             foreach (self::FILES as $file) {
