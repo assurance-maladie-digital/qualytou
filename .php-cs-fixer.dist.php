@@ -1,5 +1,18 @@
 <?php
 
+$finder = (new PhpCsFixer\Finder())
+    ->in(__DIR__ . '/')
+    ->exclude([
+        'vendor',
+        'var',
+        'config',
+        'public'
+    ])
+    ->notPath('src/Kernel.php')
+    ->notPath('public/index.php')
+    ->notPath('tests/bootstrap.php')
+;
+
 return (new PhpCsFixer\Config())
     ->setRiskyAllowed(true)
     ->setRules(
@@ -51,28 +64,16 @@ return (new PhpCsFixer\Config())
             'explicit_string_variable' => true,
             'fully_qualified_strict_types' => true,
             'global_namespace_import' => ['import_classes' => false, 'import_constants' => false, 'import_functions' => false],
-            'linebreak_after_opening_tag' => true,
             'list_syntax' => ['syntax' => 'short'],
             'mb_str_functions' => true,
             'multiline_comment_opening_closing' => true,
             'multiline_whitespace_before_semicolons' => ['strategy' => 'new_line_for_chained_calls'],
             'no_alternative_syntax' => true,
             'no_superfluous_elseif' => true,
-            'ordered_imports' => true,
             'ordered_interfaces' => true,
         ]
     )
     ->setRiskyAllowed(true)
-    ->setFinder((new PhpCsFixer\Finder())
-        ->in(__DIR__ . '/')
-        ->exclude([
-            'vendor',
-            'var',
-            'config',
-            'public'
-        ])
-        ->notPath('src/Kernel.php')
-        ->notPath('public/index.php')
-        ->notPath('tests/bootstrap.php'))
+    ->setFinder($finder)
     ->setCacheFile('.php-cs-fixer.cache')
 ;

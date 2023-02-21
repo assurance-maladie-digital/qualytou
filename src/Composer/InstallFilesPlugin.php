@@ -80,10 +80,25 @@ class InstallFilesPlugin implements EventSubscriberInterface, PluginInterface
         }
 
         $name = $operation->getPackage()->getName();
+
+        $this->io->write('<fg=yellow>Création des fichiers de configuration :</>');
+
+        $overrideAllQuestion = $this->io->askConfirmation('Écraser les configurations existantes, par défaut (oui/non) ? [<fg=yellow>oui</>] ', true);
+
         foreach (self::FILES as $file) {
+            if ($filesystem->exists($file) === true && $overrideAllQuestion !== true) {
+                $overrideFileQuestion = $this->io->askConfirmation(sprintf('Le fichier de configuration %s existe déjà. Voulez-vous l\'écraser (oui/non) ? [<fg=yellow>oui</>] ', $file), true);
+
+                if ($overrideFileQuestion === false) {
+                    $this->io->write(sprintf('<info>Le fichier de configuration %s a été conservé.</info>', $file));
+
+                    continue;
+                }
+            }
+
             $filesystem->copy($vendorBin . \DIRECTORY_SEPARATOR . $name . \DIRECTORY_SEPARATOR . $file, $file);
+            $this->io->write(sprintf('<fg=yellow>Le fichier de configuration %s a été copié</>', $file));
         }
-        $this->io->write('<fg=yellow>Qualytou a installé les fichiers nécessaires à son fonctionnement !<fg=yellow>');
     }
 
     public function prePackageUninstall(PackageEvent $event): void
@@ -96,9 +111,18 @@ class InstallFilesPlugin implements EventSubscriberInterface, PluginInterface
         }
 
         $filesystem = new Filesystem();
-        foreach (self::FILES as $file) {
-            $filesystem->remove($file);
+
+        $this->io->write('<fg=yellow>Détection des fichiers installés :</>');
+
+        $deleteAllQuestions = $this->io->askConfirmation('Supprimer les fichiers de configurations existants (oui/non) ? [<fg=yellow>oui</>] ', true);
+
+        if ($deleteAllQuestions === true) {
+            foreach (self::FILES as $file) {
+                if ($filesystem->exists($file) === true) {
+                    $filesystem->remove($file);
+                    $this->io->write(sprintf('<info>Le fichier de configuration %s a été supprimé.</info>', $file));
+                }
+            }
         }
-        $this->io->write('<fg=yellow>Qualytou a supprimé les fichiers de configuration !<fg=yellow>');
     }
 }
