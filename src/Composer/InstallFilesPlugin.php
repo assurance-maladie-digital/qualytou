@@ -114,7 +114,7 @@ class InstallFilesPlugin implements EventSubscriberInterface, PluginInterface
 
         $this->io->write('<fg=yellow>Détection des fichiers installés :</>');
 
-        $deleteAllQuestion = $this->io->askConfirmation('Supprimer les fichiers de configurations existants (oui/non) ? [<fg=yellow>oui</>] ', true);
+        $deleteAllQuestions = $this->io->askConfirmation('Supprimer les fichiers de configurations existants (oui/non) ? [<fg=yellow>oui</>] ', true);
 
         if ($deleteAllQuestions === true) {
             foreach (self::FILES as $file) {
