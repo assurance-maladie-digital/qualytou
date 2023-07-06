@@ -13,8 +13,8 @@ $finder = (new PhpCsFixer\Finder())
     ->notPath('tests/bootstrap.php')
 ;
 
-return (new PhpCsFixer\Config())
-    ->setRiskyAllowed(true)
+$config = new PhpCsFixer\Config();
+$config->setRiskyAllowed(true)
     ->setRules(
         [
             '@DoctrineAnnotation' => true,
@@ -49,6 +49,7 @@ return (new PhpCsFixer\Config())
 
             // @Symfony customised rules
             'concat_space' => ['spacing' => 'one'],
+            'global_namespace_import' => false,
             'native_function_invocation' => false,
             'single_quote' => ['strings_containing_single_quote_chars' => true],
             'visibility_required' => ['elements' => ['property', 'method', 'const']],
@@ -63,17 +64,25 @@ return (new PhpCsFixer\Config())
             'explicit_indirect_variable' => true,
             'explicit_string_variable' => true,
             'fully_qualified_strict_types' => true,
-            'global_namespace_import' => ['import_classes' => false, 'import_constants' => false, 'import_functions' => false],
+            'linebreak_after_opening_tag' => true,
             'list_syntax' => ['syntax' => 'short'],
-            'mb_str_functions' => true,
+            'mb_str_functions' => false,
             'multiline_comment_opening_closing' => true,
             'multiline_whitespace_before_semicolons' => ['strategy' => 'new_line_for_chained_calls'],
             'no_alternative_syntax' => true,
             'no_superfluous_elseif' => true,
+            'ordered_imports' => true,
             'ordered_interfaces' => true,
+            'no_superfluous_phpdoc_tags' => ['allow_mixed' => true,'remove_inheritdoc' => false],
+
+            // a supprimer en monorepo v2 uniquement >=PHP 8.0
+            // @todo a supprimer en monorepo v2 uniquement >=PHP 8.0
+            'get_class_to_class_keyword' => false,
         ]
     )
-    ->setRiskyAllowed(true)
     ->setFinder($finder)
-    ->setCacheFile('.php-cs-fixer.cache')
+    ->setUsingCache(true)
 ;
+
+return $config;
+
