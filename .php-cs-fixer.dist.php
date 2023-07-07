@@ -12,9 +12,6 @@ $finder = (new PhpCsFixer\Finder())
     ->notPath('public/index.php')
     ->notPath('tests/bootstrap.php')
 ;
-/**
- * @var array $rules
- */
 $rules =[
     '@DoctrineAnnotation' => true,
     '@Symfony' => true,
@@ -74,9 +71,7 @@ $rules =[
     'ordered_interfaces' => true,
     'no_superfluous_phpdoc_tags' => ['allow_mixed' => true,'remove_inheritdoc' => false],
 ];
-$version = explode('.', PHP_VERSION);
-if ($version[0] > 7) {
-    // a supprimer en monorepo v2 uniquement >=PHP 8.0
+if (PHP_MAJOR_VERSION > 7) {
     // @todo a supprimer en monorepo v2 uniquement >=PHP 8.0
     $rules += [ "get_class_to_class_keyword" => false ];
 }
@@ -85,7 +80,7 @@ $config = new PhpCsFixer\Config();
 $config->setRiskyAllowed(true)
     ->setRules($rules)
     ->setFinder($finder)
-    ->setUsingCache(true)
+    ->setCacheFile('.php-cs-fixer.cache')
 ;
 
 return $config;
