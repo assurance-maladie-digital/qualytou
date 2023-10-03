@@ -51,8 +51,6 @@ class InstallFilesPlugin implements EventSubscriberInterface, PluginInterface
     }
 
     /**
-     * {@inheritDoc}
-     *
      * @return array<string, string|array{0: string, 1?: int}|array<array{0: string, 1?: int}>> The event names to listen to
      */
     public static function getSubscribedEvents(): array
