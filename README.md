@@ -1,51 +1,60 @@
-# Assurance-maladie-digital Qualytou
+# 🌟 Qualytou 🌟
 
-Fournit des outils d'analyse statique pour PHP utilisé dans les projets de 
-la CNAM sous Symfony.
+Bienvenue sur **Qualytou**, l'outil d'analyse statique pour PHP conçu spécialement pour les projets de la CNAM utilisant Symfony.  
+Découvrez comment rendre votre code plus propre et performant !
 
-## Démarrage
+## 🚀 Démarrage Rapide
 
-La manière la plus simple d'utiliser Qualytou est via Composer.
+Commencer avec Qualytou est un jeu d'enfant !
+
+Utilisez Composer pour installer Qualytou dans votre projet :
 
 ```sh
 composer require --dev assurance-maladie/qualytou
 ```
 
-Une fois Qualytou installé, les fichiers de configurations sont automatiquement 
-installés à la racine dans votre projet pour indiquer aux outils comment 
-analyser votre code source.  
-Une fois configuré, vous pouvez le lancer via `php vendor/bin/grumphp run`.
+🎉 Une fois installé, Qualytou s'occupe de tout !  
+Des fichiers de configuration sont automatiquement ajoutés à la racine de votre projet, 
+guidant les outils pour une analyse optimale de votre code.  
+Pour lancer l'analyse, tapez simplement :
 
-Qualytou 2 dépend de PHP 7.3+.
+```sh
+php vendor/bin/grumphp run
+```
 
-## Fonctionnalités
+⚠️ N'oubliez pas : Qualytou 3 nécessite PHP version 8.1 ou ultérieure.
 
-Qualytou est capable d'effectuer les types d'analyse suivants :
+## 🌈 Fonctionnalités
 
-* [PHP Coding Standards Fixer (PHP CS Fixer)](https://cs.symfony.com/)
-* [PHPMD - PHP Mess Detector](https://phpmd.org/)
-* [PHPStan - PHP Static Analysis Tool](https://phpstan.org/)
-* [Psalm](https://psalm.dev/)
+Avec Qualytou, bénéficiez d'une panoplie d'analyses pour un code au top :
 
-## Utilisation
+- [PHP Coding Standards Fixer (PHP CS Fixer)](https://cs.symfony.com/)
+- [PHPMD - PHP Mess Detector](https://phpmd.org/)
+- [PHPStan - PHP Static Analysis Tool](https://phpstan.org/)
+- [Psalm](https://psalm.dev/)
 
-Après avoir [installé Qualytou](#demarrage), Qualytou a configuré 
-automatiquement les fichiers des outils.  
-Il est donc possible de personnaliser chaque fichier de configuration.
+## 🛠 Utilisation
 
-Cette commande `php vendor/bin/grumphp run` execute donc tous les outils en 
-parallèle, mais uniquement pour les modifications qui seront validées.
+Après [l'installation rapide](#demarrage), 
+personnalisez les fichiers de configuration pour une expérience sur mesure.  
+Exécutez cette commande pour lancer tous les outils en simultané :
 
-## Suppression des avertissements
+```sh
+php vendor/bin/grumphp run
+```
 
-Dans certains cas, il est préférable d'ignorer les avertissements.  
-Excepté pour [PHPMD - PHP Mess Detector](https://phpmd.org/) il est conseillé 
-d'ignorer les avertissements dans les fichiers de configuration :
+Ils travailleront ensemble, se concentrant sur les modifications que vous êtes prêt à valider.
+
+## 🔕 Gestion des Avertissements
+
+Parfois, vous voudrez ignorer certains avertissements.  
+Sauf pour [PHPMD - PHP Mess Detector](https://phpmd.org/), 
+nous recommandons de le faire directement dans les fichiers de configuration :
 
 - [PHPMD](https://phpmd.org/documentation/suppress-warnings.html)
 - [PHPStan](https://phpstan.org/user-guide/ignoring-errors#ignoring-in-configuration-file)
 - [Psalm](https://psalm.dev/docs/running_psalm/dealing_with_code_issues/#config-suppression)
 
-Ignorer les avertissements dans les fichiers de configuration permet de ne pas
-ajouter du code spécifique pour les outils d'analyses statiques.  
-Si vous décidez d'en supprimer un, votre code restera propre.
+Ignorer les avertissements dans les fichiers de configuration vous permet de maintenir un code 
+propre sans y intégrer des spécificités liées aux outils d'analyse.  
+Et si vous décidez de retirer une règle, votre code restera impeccable.
