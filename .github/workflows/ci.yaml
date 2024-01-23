@@ -19,13 +19,13 @@ jobs:
       fail-fast: false
       matrix:
         php-version:
-          - '7.4'
-          - '8.0'
           - '8.1'
+          - '8.2'
+          - '8.3'
         dependencies:
           - 'highest'
         include:
-          - php-version: '7.4'
+          - php-version: '8.1'
             dependencies: 'lowest'
 
     steps:
@@ -46,9 +46,6 @@ jobs:
         run: |
           if [[ "${{ matrix.dependencies }}" = lowest ]]; then
             echo "COMPOSER_UP=${{ env.COMPOSER_UP }} --prefer-lowest --prefer-stable" >> "$GITHUB_ENV"
-          fi
-          if [[ "${{ matrix.php-version }}" = 8.1 ]]; then
-            echo "PHP_CS_FIXER_IGNORE_ENV=1" >> "$GITHUB_ENV"
           fi
 
       - name: Install dependencies
