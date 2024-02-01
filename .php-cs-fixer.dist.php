@@ -27,6 +27,8 @@ return (new PhpCsFixer\Config())
             'concat_space' => ['spacing' => 'one'],
             // On n'importe pas les classes/fonctions/constantes globales
             'global_namespace_import' => ['import_classes' => false],
+            // On force la déclaration des types stricts
+            'declare_strict_types' => true,
         ]
     )
     ->setRiskyAllowed(true)
