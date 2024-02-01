@@ -14,7 +14,6 @@ $finder = (new PhpCsFixer\Finder())
 ;
 
 return (new PhpCsFixer\Config())
-    ->setRiskyAllowed(true)
     ->setRules(
         [
             '@DoctrineAnnotation' => true,
