@@ -25,8 +25,8 @@ return (new PhpCsFixer\Config())
             'comment_to_phpdoc' => true,
             // On met un espace avant et après la concaténation
             'concat_space' => ['spacing' => 'one'],
-            // Problème d'import : https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues/7257
-            'global_namespace_import' => ['import_classes' => true],
+            // On n'importe pas les classes/fonctions/constantes globales
+            'global_namespace_import' => ['import_classes' => false],
         ]
     )
     ->setRiskyAllowed(true)
