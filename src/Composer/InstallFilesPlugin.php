@@ -17,8 +17,6 @@ use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * @psalm-suppress MissingConstructor
- *
- * @psalm-api
  */
 class InstallFilesPlugin implements EventSubscriberInterface, PluginInterface
 {
