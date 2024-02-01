@@ -57,5 +57,4 @@ jobs:
 
       - name: Run the static tools with grumphp
         run: |
-          mv psalm.qualytou.xml psalm.xml
           php vendor/bin/grumphp run --no-interaction
