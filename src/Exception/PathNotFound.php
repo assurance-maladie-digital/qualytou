@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace PHPStaticAnalysisTool\Exception;
 
-use Exception;
-
-class PathNotFound extends Exception
+class PathNotFound extends \Exception
 {
     public function __construct(string $path)
     {

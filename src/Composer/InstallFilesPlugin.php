@@ -22,12 +22,6 @@ class InstallFilesPlugin implements EventSubscriberInterface, PluginInterface
 {
     public const PACKAGE_NAME = 'assurance-maladie/qualytou';
 
-    /** @var Composer */
-    private $composer;
-
-    /** @var IOInterface */
-    private $io;
-
     private const FILES = [
         'grumphp.yml',
         '.php-cs-fixer.dist.php',
@@ -35,6 +29,12 @@ class InstallFilesPlugin implements EventSubscriberInterface, PluginInterface
         'pmd-ruleset.xml',
         'psalm.xml',
     ];
+
+    /** @var Composer */
+    private $composer;
+
+    /** @var IOInterface */
+    private $io;
 
     public function activate(Composer $composer, IOInterface $io): void
     {
