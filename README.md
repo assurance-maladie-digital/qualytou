@@ -31,7 +31,6 @@ Avec Qualytou, bénéficiez d'une panoplie d'analyses pour un code au top :
 - [PHP Coding Standards Fixer (PHP CS Fixer)](https://cs.symfony.com/)
 - [PHPMD - PHP Mess Detector](https://phpmd.org/)
 - [PHPStan - PHP Static Analysis Tool](https://phpstan.org/)
-- [Psalm](https://psalm.dev/)
 
 ## 🛠 Utilisation
 
@@ -53,7 +52,6 @@ nous recommandons de le faire directement dans les fichiers de configuration :
 
 - [PHPMD](https://phpmd.org/documentation/suppress-warnings.html)
 - [PHPStan](https://phpstan.org/user-guide/ignoring-errors#ignoring-in-configuration-file)
-- [Psalm](https://psalm.dev/docs/running_psalm/dealing_with_code_issues/#config-suppression)
 
 Ignorer les avertissements dans les fichiers de configuration vous permet de maintenir un code 
 propre sans y intégrer des spécificités liées aux outils d'analyse.  
