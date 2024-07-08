@@ -15,11 +15,6 @@ use Composer\Plugin\PluginInterface;
 use PHPStaticAnalysisTool\Exception\PathNotFound;
 use Symfony\Component\Filesystem\Filesystem;
 
-/**
- * @psalm-suppress MissingConstructor
- *
- * @psalm-api
- */
 class InstallFilesPlugin implements EventSubscriberInterface, PluginInterface
 {
     public const PACKAGE_NAME = 'assurance-maladie/qualytou';
@@ -29,7 +24,6 @@ class InstallFilesPlugin implements EventSubscriberInterface, PluginInterface
         '.php-cs-fixer.dist.php',
         'phpstan.neon',
         'pmd-ruleset.xml',
-        'psalm.xml',
     ];
 
     /** @var Composer */
