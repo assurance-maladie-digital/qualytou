@@ -14,7 +14,7 @@
         "php": "^8.1",
         "composer-plugin-api": "^2.2",
         "ekino/phpstan-banned-code": "^1.0",
-        "friendsofphp/php-cs-fixer": "3.48",
+        "friendsofphp/php-cs-fixer": "3.61.1",
         "phpmd/phpmd": "^2.15",
         "phpro/grumphp": "^2.4",
         "phpstan/extension-installer": "^1.3",
